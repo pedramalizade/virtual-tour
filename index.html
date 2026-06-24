@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="pannellum.css">
+    <script src="pannellum.js"></script>
+
+    <style>
+        #panorama {
+            width: 100%;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="panorama"></div>
+
+<script>
+pannellum.viewer('panorama', {
+    "default": {
+        "firstScene": "room1"
+    },
+    "scenes": {
+        "room1": {
+            "type": "equirectangular",
+            "panorama": "room1.png",
+            "hotSpots": [
+                {
+                    "pitch": 0,
+                    "yaw": 80,
+                    "type": "scene",
+                    "text": "برو اتاق بعدی",
+                    "sceneId": "room2"
+                }
+            ]
+        },
+
+        "room2": {
+            "type": "equirectangular",
+            "panorama": "room2.png",
+            "hotSpots": [
+                {
+                    "pitch": 0,
+                    "yaw": -95,
+                    "type": "scene",
+                    "text": "برگرد",
+                    "sceneId": "room1"
+                }
+            ]
+        }
+    }
+});
+</script>
+
+</body>
+</html>
