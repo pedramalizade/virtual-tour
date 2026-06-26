@@ -1,41 +1,17 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html>
 <head>
-<meta charset="UTF-8">
+    <meta charset="utf-8">
 
-<link rel="stylesheet" href="pannellum.css">
-<script src="pannellum.js"></script>
+    <link rel="stylesheet" href="pannellum.css">
+    <script src="pannellum.js"></script>
 
-<style>
-
-html,body{
-    margin:0;
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    background:black;
-}
-
-#panorama{
-    width:100%;
-    height:100vh;
-
-    transition:
-        transform .7s ease,
-        opacity .7s ease,
-        filter .7s ease;
-
-    transform-origin:center center;
-}
-
-.zooming{
-    transform:scale(1.25);
-    opacity:0;
-    filter:blur(2px);
-}
-
-</style>
-
+    <style>
+        #panorama {
+            width: 100%;
+            height: 100vh;
+        }
+    </style>
 </head>
 
 <body>
@@ -44,96 +20,57 @@ html,body{
 
 <script>
 
-const viewer = pannellum.viewer('panorama',{
+pannellum.viewer('panorama', {
 
-    default:{
-        firstScene:"room1"
+    "default": {
+        "firstScene": "room1"
     },
 
-    scenes:{
+    "scenes": {
 
-        room1:{
+        "room1": {
 
-            type:"equirectangular",
+            "type": "equirectangular",
 
-            panorama:"room1.png",
+            "panorama": "room1.png",
 
-            hotSpots:[
-
+            "hotSpots": [
                 {
+                    "pitch": 0,
+                    "yaw": 80,
+                    "type": "scene",
+                    "text": "برو اتاق بعدی",
+                    "sceneId": "room2",
 
-                    pitch:0,
-
-                    yaw:80,
-
-                    type:"info",
-
-                    text:"برو اتاق بعدی",
-                    clickHandlerFunc:function(){
-
-                        changeSceneSmooth("room2");
-
-                    }
-
+                    "targetYaw": 90,
+                    "targetPitch": 0
                 }
-
             ]
-
         },
 
-        room2:{
+        "room2": {
 
-            type:"equirectangular",
+            "type": "equirectangular",
 
-            panorama:"room2.png",
+            "panorama": "room2.png",
 
-            hotSpots:[
-
+            "hotSpots": [
                 {
+                    "pitch": 0,
+                    "yaw": -95,
+                    "type": "scene",
+                    "text": "برگرد",
+                    "sceneId": "room1",
 
-                    pitch:0,
-
-                    yaw:-95,
-
-                    type:"info",
-
-                    text:"برگرد",
-                    clickHandlerFunc:function(){
-
-                        changeSceneSmooth("room1");
-
-                    }
-
+                    "targetYaw": 90,
+                    "targetPitch": 0
                 }
-
             ]
-
         }
 
     }
 
 });
-
-function changeSceneSmooth(scene){
-
-    const pano = document.getElementById("panorama");
-
-    pano.classList.add("zooming");
-
-    setTimeout(function(){
-
-        if(scene === "room2"){
-            viewer.loadScene(scene, 0, 90, 1000);
-        }
-        else{
-            viewer.loadScene(scene, 0, 90, 1000);
-        }
-
-        pano.classList.remove("zooming");
-
-    },650);
-
-}
 
 </script>
 
